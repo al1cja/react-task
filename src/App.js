@@ -1,7 +1,13 @@
+import './App.css';
+import { Switch, Route } from 'react-router-dom';
+import Login from './pages/Login';
+
 const App = () => {
   return (
     <div className="App">
-      <p>test</p>
+      <Switch>
+        <Route path="/" component={Login} />
+      </Switch>
     </div>
   );
 }
