@@ -7,12 +7,14 @@ import { useState } from 'react';
 
 const App = () => {
   const [isLogin, setIsLogin] = useState(false);
-  
+  console.log(localStorage.getItem('User'))
+
   return (
     <div className="App">
       <Switch>
         <Route path="/login" component={Login} />
-        <PrivateRoute authenticated={isLogin} component={Home} path="/" />
+        <Route path="/" component={Home} />
+        {/*<PrivateRoute authenticated={isLogin} component={Home} path="/" />*/}
       </Switch>
     </div>
   );

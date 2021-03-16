@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { withRouter, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import LoginBox from '../components/login/LoginBox';
 
@@ -13,6 +14,8 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const [userDara, setUserData] = useState();
+
+    const history = useHistory();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -49,6 +52,9 @@ const Login = (props) => {
     const handleData = (data) => {
         if (data.status === "success") {
             setUserData(data.player);
+            history.push("/");
+            localStorage.setItem('User', data.player);
+            localStorage.setItem('UserName', username);
         }
         else {
             setMessage("Wrong Username or Password");
@@ -74,4 +80,4 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+export default withRouter(Login);
