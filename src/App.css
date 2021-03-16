@@ -1,4 +1,22 @@
 body {
+    margin: 0;
     font-family: 'Open Sans', sans-serif;
     text-align: center;
+    background: #ebf3f7;
+    color: #222;
+}
+
+.primaryBtn {
+    background: #05405e;
+    color: #ebf3f7;
+    border: 2px solid #05405e;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: .5rem 0;
+    cursor: pointer;
+}
+
+.primaryBtn:hover {
+    background: #ebf3f7;
+    color: #05405e;
 }
