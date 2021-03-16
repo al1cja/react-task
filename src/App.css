@@ -17,6 +17,10 @@ body {
 }
 
 .primaryBtn:hover {
-    background: #ebf3f7;
+    background: #fff;
     color: #05405e;
+}
+
+.primaryBtn:focus {
+    outline: none;
 }
