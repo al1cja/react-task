@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const MovieWrapper = styled.div`
-    width: 80%;
     margin: 1rem;
     box-shadow: 0 0 1em #bec9cf;
     display: flex;

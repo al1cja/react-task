@@ -13,7 +13,6 @@ const Login = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const [userDara, setUserData] = useState();
 
     const history = useHistory();
 
@@ -51,7 +50,6 @@ const Login = (props) => {
 
     const handleData = (data) => {
         if (data.status === "success") {
-            setUserData(data.player);
             localStorage.setItem('User', JSON.stringify(data.player));
             localStorage.setItem('UserName', username);
             history.push("/");
