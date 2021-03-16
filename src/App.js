@@ -6,15 +6,15 @@ import Login from './pages/Login';
 import { useState } from 'react';
 
 const App = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  console.log(localStorage.getItem('User'))
+  const isAuth = localStorage.getItem('User') === null
+    ? false
+    : true;
 
   return (
     <div className="App">
       <Switch>
         <Route path="/login" component={Login} />
-        <Route path="/" component={Home} />
-        {/*<PrivateRoute authenticated={isLogin} component={Home} path="/" />*/}
+        <PrivateRoute authenticated={isAuth} component={Home} path="/" />
       </Switch>
     </div>
   );

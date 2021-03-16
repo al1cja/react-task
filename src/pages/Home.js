@@ -1,14 +1,8 @@
-import { useEffect } from "react";
-
+import Header from '../components/movies/Header';
 
 const Home = () => {
-
-    useEffect(() => {
-        let user = localStorage.getItem('User');
-        console.log(user);
-    }, []);
     return (
-        <p>Home</p>
+        <Header />
     )
 }
 

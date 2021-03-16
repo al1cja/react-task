@@ -52,9 +52,9 @@ const Login = (props) => {
     const handleData = (data) => {
         if (data.status === "success") {
             setUserData(data.player);
-            history.push("/");
-            localStorage.setItem('User', data.player);
+            localStorage.setItem('User', JSON.stringify(data.player));
             localStorage.setItem('UserName', username);
+            history.push("/");
         }
         else {
             setMessage("Wrong Username or Password");
