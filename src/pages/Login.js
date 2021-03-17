@@ -53,7 +53,7 @@ const Login = () => {
         setPassword(e.target.value);
     }
 
-    async function setData(data) {
+    const setData = (data) => {
         localStorage.setItem('User', JSON.stringify(data.player));
         localStorage.setItem('UserName', username);
     }
@@ -61,7 +61,8 @@ const Login = () => {
     const handleData = (data) => {
         if (data.status === "success") {
             setIsLoading(true);
-            setData(data).then(() => history.push("/"))
+            setData(data);
+            history.push("/");
         }
         else {
             setMessage("Wrong Username or Password");
