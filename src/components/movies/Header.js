@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import IsLoading from '../loading/IsLoading';
 import Logout from '../logout/Logout';
 
 const HeaderWrapper = styled.header`
@@ -50,20 +52,30 @@ const HeaderWrapper = styled.header`
 `;
 
 const Header = () => {
-    const userData = JSON.parse(localStorage.getItem('User'));
-    const username = localStorage.getItem('UserName');
+    const [userData, setUserData] = useState();
+    const [username, setUsername] = useState();
+
+    useEffect(() => {
+        setUserData(JSON.parse(localStorage.getItem('User')));
+        setUsername(localStorage.getItem('UserName'));
+    }, []);
+
+    const content = (userData === undefined || username === undefined )
+    ? <IsLoading />
+    : <div>
+        <img alt="avatar" src={userData.avatar} />
+        <div>
+            <h3>{userData.name}</h3>
+            <div>
+                <p>@{username}</p>
+                <p>{userData.event}</p>
+            </div>
+        </div>
+    </div>
+
     return (
         <HeaderWrapper>
-            <div>
-                <img alt="avatar" src={userData.avatar} />
-                <div>
-                    <h3>{userData.name}</h3>
-                    <div>
-                        <p>@{username}</p>
-                        <p>{userData.event}</p>
-                    </div>
-                </div>
-            </div>
+            {content}
             <div>
                 <Logout username={username}/>
             </div>
