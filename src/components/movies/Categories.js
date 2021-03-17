@@ -28,7 +28,11 @@ const CategoriesWrapper = styled.div`
 const Categories = (props) => (
     <CategoriesWrapper>
         <h2>Categories</h2>
-        <input type="text"  placeholder="Search movie" />
+        <input 
+            type="text" 
+            placeholder="Search movie"
+            value={props.searchValue}
+            onChange={(e) => props.search(e.target.value)} />
         <div>
             <Category name="All"/>
             {props.categories.map(category => 

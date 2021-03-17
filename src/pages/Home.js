@@ -4,8 +4,9 @@ import MoviesPage from '../components/movies/MoviesPage';
 import IsLoading from '../components/loading/IsLoading';
 
 const Home = () => {
-    const[movies, setMovies] = useState();
-    const[categories, setCategories] = useState();
+    const[movies, setMovies] = useState([]);
+    const[categories, setCategories] = useState([]);
+    const[searchValue, setSearchValue] = useState("");
     
     useEffect(() => {
         fetch('http://localhost:3001/movies', {method: 'get'})
@@ -17,14 +18,27 @@ const Home = () => {
             .then(data => setCategories(data));
     }, []);
 
-    const content = (movies && categories) 
-    ? <MoviesPage movies={movies} categories={categories} />
+    const handleSearch = (e) => {
+        setSearchValue(e);
+    }
+
+    const filteredMovies = movies.filter(movie => 
+        movie.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+
+    const content = (movies.length>0 && categories.length>0) 
+    ? <MoviesPage 
+        movies={filteredMovies} 
+        categories={categories}
+        search={handleSearch}
+        searchValue={searchValue} />
     : <IsLoading />
 
     return (
         <>
             <Header />
             {content}
+            {console.log(filteredMovies)}
         </>
     )
 }
