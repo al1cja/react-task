@@ -6,6 +6,7 @@ import MoviesPage from '../components/movies/MoviesPage';
 
 const Home = () => {
     const[movies, setMovies] = useState([]);
+    const[categories, setCategories] = useState([]);
     const[isLoading, setIsLoading] = useState(true);
     
     useEffect(() => {
@@ -13,7 +14,13 @@ const Home = () => {
             .then(response => response.json())
             .then(data => {
                 setMovies(data);
-                console.log(data);
+                setIsLoading(false);
+            });
+
+        fetch('http://localhost:3001/categories', {method: 'get'})
+            .then(response => response.json())
+            .then(data => {
+                setCategories(data);
                 setIsLoading(false);
             });
     }, []);
@@ -22,7 +29,9 @@ const Home = () => {
         <>
             <Header />
             {!isLoading && 
-                <MoviesPage movies={movies}  />
+                <MoviesPage 
+                    movies={movies}
+                    categories={categories} />
             }
         </>
     )

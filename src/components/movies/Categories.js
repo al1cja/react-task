@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Category from './Category';
 
 const CategoriesWrapper = styled.div`
     text-align: left;
@@ -18,12 +19,22 @@ const CategoriesWrapper = styled.div`
             outline: none;
         }
     }
+
+    > div {
+        margin-top: 1rem;
+    }
 `;
 
 const Categories = (props) => (
     <CategoriesWrapper>
         <h2>Categories</h2>
         <input type="text"  placeholder="Search movie" />
+        <div>
+            <Category name="All"/>
+            {props.categories.map(category => 
+                <Category key={category.id} name={category.name} />
+            )}
+        </div>
     </CategoriesWrapper>
 );
 
