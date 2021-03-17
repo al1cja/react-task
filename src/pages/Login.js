@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { withRouter, useHistory, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import IsLoading from '../components/loading/IsLoading';
 import LoginBox from '../components/login/LoginBox';
+import Home from './Home';
 
 const LoginWrapper = styled.div`
     display: flex;
@@ -15,11 +17,17 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [isAuth, setIsAuth] = useState();
     const history = useHistory();
 
-    const isAuth = localStorage.getItem('User') === null
+    useEffect(() => {
+        //localStorage.clear();
+        setIsAuth(localStorage.getItem('User') === null ? false : true)
+    }, [])
+
+    /*const isAuth = localStorage.getItem('User') === null
         ? false
-        : true;
+        : true;*/
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -53,16 +61,14 @@ const Login = () => {
         setPassword(e.target.value);
     }
 
-    const setData = (data) => {
-        localStorage.setItem('User', JSON.stringify(data.player));
-        localStorage.setItem('UserName', username);
-    }
-
     const handleData = (data) => {
         if (data.status === "success") {
             setIsLoading(true);
-            setData(data);
+            localStorage.setItem('User', JSON.stringify(data.player));
+            localStorage.setItem('UserName', username);
+            setIsAuth(true);
             history.push("/");
+            history.go(0);
         }
         else {
             setMessage("Wrong Username or Password");
