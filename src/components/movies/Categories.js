@@ -34,9 +34,13 @@ const Categories = (props) => (
             value={props.searchValue}
             onChange={(e) => props.search(e.target.value)} />
         <div>
-            <Category name="All"/>
+            <Category name="All" click={props.selectAllCategories}/>
             {props.categories.map(category => 
-                <Category key={category.id} name={category.name} />
+                <Category 
+                    key={category.id} 
+                    name={category.name}
+                    id={category.id}
+                    click={props.selectCategory} />
             )}
         </div>
     </CategoriesWrapper>

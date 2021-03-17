@@ -16,7 +16,7 @@ const CategoryWrapper = styled.div`
 `;
 
 const Category = (props) => (
-    <CategoryWrapper>
+    <CategoryWrapper onClick={() => props.click(props.id)}>
         <FiArrowRight />
         <span>{props.name}</span>
     </CategoryWrapper>

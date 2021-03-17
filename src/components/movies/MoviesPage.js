@@ -9,11 +9,16 @@ const PageWrapper = styled.div`
 
 const MoviesPage = (props) => (
     <PageWrapper>
-        <Movies movies={props.movies} />
+        <Movies 
+            movies={props.movies}
+            categoryMovies={props.categoryMovies}
+            allCategories={props.allCategories} />
         <Categories 
             categories={props.categories}
             search={props.search}
-            searchValue={props.searchValue} />
+            searchValue={props.searchValue}
+            selectAllCategories={props.selectAllCategories}
+            selectCategory={props.selectCategory} />
     </PageWrapper>
 )
 

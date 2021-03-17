@@ -7,6 +7,8 @@ const Home = () => {
     const[movies, setMovies] = useState([]);
     const[categories, setCategories] = useState([]);
     const[searchValue, setSearchValue] = useState("");
+    const[selectedCategory, setSelectedCategory] = useState(3);
+    const[allCategories, setAllCategories] = useState(false);
     
     useEffect(() => {
         fetch('http://localhost:3001/movies', {method: 'get'})
@@ -22,23 +24,34 @@ const Home = () => {
         setSearchValue(e);
     }
 
+    const handleSelectCategory = (e) => {
+        setSelectedCategory(e);
+        setAllCategories(false);
+    }
+
     const filteredMovies = movies.filter(movie => 
         movie.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+    const filteredByCategories = filteredMovies.filter(movie => 
+        movie.categories.includes(selectedCategory));
 
 
     const content = (movies.length>0 && categories.length>0) 
     ? <MoviesPage 
-        movies={filteredMovies} 
+        movies={filteredMovies}
+        categoryMovies={filteredByCategories}
+        allCategories={allCategories}
         categories={categories}
         search={handleSearch}
-        searchValue={searchValue} />
+        searchValue={searchValue}
+        selectAllCategories={() => setAllCategories(true)}
+        selectCategory={handleSelectCategory} />
     : <IsLoading />
 
     return (
         <>
             <Header />
             {content}
-            {console.log(filteredMovies)}
         </>
     )
 }

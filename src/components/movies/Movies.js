@@ -8,13 +8,17 @@ const MoviesWrapper = styled.div`
     }
 `;
 
-const Movies = (props) => (
-    <MoviesWrapper>
-        <h2>Top 10 iMDb Movies</h2>
-        {props.movies.map(movie =>
-            <Movie key={movie.title} movie={movie} />
-        )}
-    </MoviesWrapper>
-);
+const Movies = (props) => {
+    const movies = props.allCategories ? props.movies : props.categoryMovies;
+
+    return(
+        <MoviesWrapper>
+            <h2>Top 10 iMDb Movies</h2>
+            {movies.map(movie =>
+                <Movie key={movie.title} movie={movie} />
+            )}
+        </MoviesWrapper>
+    );
+}
 
 export default Movies;
