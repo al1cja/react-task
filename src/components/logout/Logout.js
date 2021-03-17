@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi';
 
 const LogoutBtn = styled.button`
     font-size: 20px;
@@ -10,6 +11,12 @@ const LogoutBtn = styled.button`
     border: 3px solid #ebf3f7;
     border-radius: 20px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    > svg {
+        margin-right: 1rem;
+    }
 
     &:hover {
         background: #05405e;
@@ -39,7 +46,10 @@ const Logout = (props) => {
     }
 
     return (
-        <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
+        <LogoutBtn onClick={handleLogout}>
+            <FiLogOut />
+            Logout
+        </LogoutBtn>
     );
 }
 

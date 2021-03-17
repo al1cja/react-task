@@ -36,6 +36,14 @@ const MovieWrapper = styled.div`
         display: flex;
         padding: 1rem;
 
+        @media (max-width: 700px) {
+            flex-flow: column;
+
+            > img {
+                align-self: center;
+            }
+        }
+
         > div {
             padding: 0 1rem;
         

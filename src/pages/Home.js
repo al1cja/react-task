@@ -7,8 +7,8 @@ const Home = () => {
     const [movies, setMovies] = useState([]);
     const [categories, setCategories] = useState([]);
     const [searchValue, setSearchValue] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState(3);
-    const [allCategories, setAllCategories] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState();
+    const [allCategories, setAllCategories] = useState(true);
     
     useEffect(() => {
         fetch('http://localhost:3001/movies', {method: 'get'})

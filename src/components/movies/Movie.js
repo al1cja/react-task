@@ -11,6 +11,11 @@ const MovieWrapper = styled.div`
         flex-flow: column;
         text-align: left;
         padding: 0 1rem;
+
+        > a {
+            text-decoration: none;
+            color: #05405e;
+        }
     }
 `;
 
@@ -22,7 +27,7 @@ const Movie = (props) => (
         <div>
             <h3>{props.movie.title}</h3>
             {console.log(props.movie)}
-            <MoreButton to={"/"+props.movie.title}>more</MoreButton>
+            <MoreButton to={"/"+props.movie.title}>Read more</MoreButton>
         </div>
     </MovieWrapper>
 )
