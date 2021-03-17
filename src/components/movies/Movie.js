@@ -26,7 +26,6 @@ const Movie = (props) => (
         <img alt="cover" src={props.movie.cover}/>
         <div>
             <h3>{props.movie.title}</h3>
-            {console.log(props.movie)}
             <MoreButton to={"/"+props.movie.title}>Read more</MoreButton>
         </div>
     </MovieWrapper>

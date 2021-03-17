@@ -42,7 +42,7 @@ const Logout = (props) => {
             username: props.username
         })
     })
-        .then(() => {history.push("/login"); localStorage.clear()});
+        .then(() => {localStorage.clear(); history.push("/login");});
     }
 
     return (

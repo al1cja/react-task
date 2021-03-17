@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { withRouter, useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
+import IsLoading from '../components/loading/IsLoading';
 import LoginBox from '../components/login/LoginBox';
 
 const LoginWrapper = styled.div`
@@ -9,12 +10,16 @@ const LoginWrapper = styled.div`
     align-items: center;
 `;
 
-const Login = (props) => {
+const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
+
+    const isAuth = localStorage.getItem('User') === null
+        ? false
+        : true;
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -48,11 +53,15 @@ const Login = (props) => {
         setPassword(e.target.value);
     }
 
+    async function setData(data) {
+        localStorage.setItem('User', JSON.stringify(data.player));
+        localStorage.setItem('UserName', username);
+    }
+
     const handleData = (data) => {
         if (data.status === "success") {
-            localStorage.setItem('User', JSON.stringify(data.player));
-            localStorage.setItem('UserName', username);
-            history.push("/test");
+            setIsLoading(true);
+            setData(data).then(() => history.push("/"))
         }
         else {
             setMessage("Wrong Username or Password");
@@ -67,14 +76,21 @@ const Login = (props) => {
         return () => clearTimeout(timer);
     }
 
+    const content = isLoading
+    ? <IsLoading />
+    : <LoginBox 
+        changeUsername={handleUsername}
+        changePassword={handlePassword}
+        login={handleLogin}
+        message={message}/>
+
     return (
-        <LoginWrapper>
-            <LoginBox 
-                changeUsername={handleUsername}
-                changePassword={handlePassword}
-                login={handleLogin}
-                message={message}/>
-        </LoginWrapper>
+        <>
+            {!isAuth && <LoginWrapper>
+                {content}
+            </LoginWrapper> }
+            {isAuth && <Redirect to="/" />}
+        </>
     )
 }
 
