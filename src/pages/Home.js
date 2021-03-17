@@ -1,38 +1,30 @@
 import { useEffect, useState } from 'react';
-import Categories from '../components/movies/Categories';
 import Header from '../components/movies/Header';
-import Movies from '../components/movies/Movies';
 import MoviesPage from '../components/movies/MoviesPage';
+import IsLoading from '../components/loading/IsLoading';
 
 const Home = () => {
-    const[movies, setMovies] = useState([]);
-    const[categories, setCategories] = useState([]);
-    const[isLoading, setIsLoading] = useState(true);
+    const[movies, setMovies] = useState();
+    const[categories, setCategories] = useState();
     
     useEffect(() => {
         fetch('http://localhost:3001/movies', {method: 'get'})
             .then(response => response.json())
-            .then(data => {
-                setMovies(data);
-                setIsLoading(false);
-            });
+            .then(data => setMovies(data));
 
         fetch('http://localhost:3001/categories', {method: 'get'})
             .then(response => response.json())
-            .then(data => {
-                setCategories(data);
-                setIsLoading(false);
-            });
+            .then(data => setCategories(data));
     }, []);
+
+    const content = (movies && categories) 
+    ? <MoviesPage movies={movies} categories={categories} />
+    : <IsLoading />
 
     return (
         <>
             <Header />
-            {!isLoading && 
-                <MoviesPage 
-                    movies={movies}
-                    categories={categories} />
-            }
+            {content}
         </>
     )
 }
