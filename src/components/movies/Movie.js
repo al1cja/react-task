@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const MovieWrapper = styled.div`
     margin: 1rem;
@@ -13,12 +14,15 @@ const MovieWrapper = styled.div`
     }
 `;
 
+const MoreButton = styled(Link)``;
+
 const Movie = (props) => (
     <MovieWrapper>
         <img alt="cover" src={props.movie.cover}/>
         <div>
             <h3>{props.movie.title}</h3>
             {console.log(props.movie)}
+            <MoreButton to={"/"+props.movie.title}>more</MoreButton>
         </div>
     </MovieWrapper>
 )

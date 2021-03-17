@@ -4,11 +4,11 @@ import MoviesPage from '../components/movies/MoviesPage';
 import IsLoading from '../components/loading/IsLoading';
 
 const Home = () => {
-    const[movies, setMovies] = useState([]);
-    const[categories, setCategories] = useState([]);
-    const[searchValue, setSearchValue] = useState("");
-    const[selectedCategory, setSelectedCategory] = useState(3);
-    const[allCategories, setAllCategories] = useState(false);
+    const [movies, setMovies] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState(3);
+    const [allCategories, setAllCategories] = useState(false);
     
     useEffect(() => {
         fetch('http://localhost:3001/movies', {method: 'get'})
