@@ -18,7 +18,9 @@ const MoviesPage = (props) => (
             search={props.search}
             searchValue={props.searchValue}
             selectAllCategories={props.selectAllCategories}
-            selectCategory={props.selectCategory} />
+            allCategories={props.allCategories}
+            selectCategory={props.selectCategory}
+            selectedCategory={props.selectedCategory} />
     </PageWrapper>
 )
 

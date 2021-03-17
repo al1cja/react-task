@@ -45,7 +45,9 @@ const Home = () => {
         search={handleSearch}
         searchValue={searchValue}
         selectAllCategories={() => setAllCategories(true)}
-        selectCategory={handleSelectCategory} />
+        allCategories={allCategories}
+        selectCategory={handleSelectCategory}
+        selectedCategory={selectedCategory} />
     : <IsLoading />
 
     return (
